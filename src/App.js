@@ -55,7 +55,7 @@ function App() {
         <button type="submit">Submit</button>
       </form>
 
-      {container !== "" && <div>Message : {container.chatbot.response}</div>}
+      {container !== null && <div>Message : {container.chatbot.response}</div>}
     </div>
   );
 }
