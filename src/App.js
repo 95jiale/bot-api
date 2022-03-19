@@ -9,22 +9,22 @@ function App() {
   const [lastPoint, setLastPoint] = useState("");
 
   useEffect(() => {
-    fetch(
-      `https://ai-chatbot.p.rapidapi.com/chat/free?message=${query}&uid=user1`,
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "ai-chatbot.p.rapidapi.com",
-          "x-rapidapi-key":
-            "f729371a18msh44910f21e8b478bp1eb1dajsna71e6455e36c",
-        },
-      }
-    )
-      .then((response) => response.json())
-
-      .then((data) => console.log(data))
-
-      .catch((err) => console.error(err));
+    if (query != "") {
+      fetch(
+        `https://ai-chatbot.p.rapidapi.com/chat/free?message=${query}&uid=user1`,
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-host": "ai-chatbot.p.rapidapi.com",
+            "x-rapidapi-key":
+              "f729371a18msh44910f21e8b478bp1eb1dajsna71e6455e36c",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err));
+    }
   }, [lastPoint]);
 
   const onChangeHandler = (e) => {
