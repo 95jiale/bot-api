@@ -20,17 +20,12 @@ function App() {
         },
       }
     )
-      .then((response) => {
-        console.log(response.json());
-      })
-      .then((data) => {
-        setContainer(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      }),
-      [lastPoint];
-  });
+      .then((response) => response.json())
+
+      .then((data) => console.log(data))
+
+      .catch((err) => console.error(err));
+  }, [lastPoint]);
 
   const onChangeHandler = (e) => {
     setQuery(e.target.value);
@@ -51,7 +46,7 @@ function App() {
         <button type="submit">Subtmit</button>
       </form>
 
-      <div>Message : {container.data.chatbot.message}</div>
+      {/* <div>Message : {container.data.chatbot.message}</div> */}
     </div>
   );
 }
