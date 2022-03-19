@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     fetch(
-      `https://acobot-brainshop-ai-v1.p.rapidapi.com/get?bid=178&key=sX5A2PcYZbsN5EY6&uid=mashape&msg=+${query}`,
+      `https://acobot-brainshop-ai-v1.p.rapidapi.com/get?bid=178&key=sX5A2PcYZbsN5EY6&uid=mashape&msg=${query}`,
       {
         method: "GET",
         headers: {
@@ -24,7 +24,7 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        setContainer([data]);
+        setContainer(data);
       })
       .catch((err) => {
         console.error(err);
@@ -50,14 +50,16 @@ function App() {
         <button type="submit">Subtmit</button>
       </form>
 
-      {container.map((item) => {
+      <div>Message : {container.chatbox.message}</div>
+      <div>Response : {container.chatbox.response}</div>
+      {/* {container.map((item) => {
         return (
           <div>
             <p>{item.response}</p>
             <p>{item.message}</p>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }
