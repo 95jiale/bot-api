@@ -10,33 +10,34 @@ function App() {
 
   useEffect(() => {
     fetch(
-      `https://acobot-brainshop-ai-v1.p.rapidapi.com/get?bid=178&key=sX5A2PcYZbsN5EY6&uid=mashape&msg=${query}`,
+      `https://ai-chatbot.p.rapidapi.com/chat/free?message=${query}&uid=user1`,
       {
         method: "GET",
         headers: {
-          "x-rapidapi-host": "acobot-brainshop-ai-v1.p.rapidapi.com",
+          "x-rapidapi-host": "ai-chatbot.p.rapidapi.com",
           "x-rapidapi-key":
             "f729371a18msh44910f21e8b478bp1eb1dajsna71e6455e36c",
         },
       }
     )
       .then((response) => {
-        return response.json();
+        console.log(response.json());
       })
       .then((data) => {
         setContainer(data);
       })
       .catch((err) => {
         console.error(err);
-      });
-  }, [lastPoint]);
+      }),
+      [lastPoint];
+  });
 
   const onChangeHandler = (e) => {
     setQuery(e.target.value);
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    setLastPoint(query);
+    setLastPoint(query.replaceAll(" ", "%20"));
   };
   return (
     <div className="App">
@@ -50,16 +51,7 @@ function App() {
         <button type="submit">Subtmit</button>
       </form>
 
-      <div>Message : {container.chatbox.message}</div>
-      <div>Response : {container.chatbox.response}</div>
-      {/* {container.map((item) => {
-        return (
-          <div>
-            <p>{item.response}</p>
-            <p>{item.message}</p>
-          </div>
-        );
-      })} */}
+      <div>Message : {container.data.chatbot.message}</div>
     </div>
   );
 }
