@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 function App() {
   const [query, setQuery] = useState("");
 
-  const [container, setContainer] = useState([]);
+  const [container, setContainer] = useState(null);
 
   const [lastPoint, setLastPoint] = useState("");
 
-  useEffect(() => {
+  const useEffectFunction = () => {
     if (query != "") {
+      console.log("sending query now");
       fetch(
         `https://ai-chatbot.p.rapidapi.com/chat/free?message=${query}&uid=user1`,
         {
@@ -22,10 +23,19 @@ function App() {
         }
       )
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => setContainer(data))
         .catch((err) => console.error(err));
+    } else {
+      const tempContainer = {
+        chatbot: {
+          response: "Please type something in the textbox",
+        },
+      };
+      setContainer(tempContainer);
     }
-  }, [lastPoint]);
+  };
+
+  useEffect(useEffectFunction, [lastPoint]);
 
   const onChangeHandler = (e) => {
     setQuery(e.target.value);
@@ -46,7 +56,7 @@ function App() {
         <button type="submit">Subtmit</button>
       </form>
 
-      {/* <div>Message : {container.data.chatbot.message}</div> */}
+      {container != null && <div>Message : {container.chatbot.response}</div>}
     </div>
   );
 }
