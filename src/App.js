@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 function App() {
   const [query, setQuery] = useState("");
 
-  const [container, setContainer] = useState([]);
+  const [container, setContainer] = useState(null);
 
   const [lastPoint, setLastPoint] = useState("");
 
@@ -22,7 +22,7 @@ function App() {
         }
       )
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => setContainer(data))
         .catch((err) => console.error(err));
     }
   }, [lastPoint]);
@@ -46,7 +46,7 @@ function App() {
         <button type="submit">Subtmit</button>
       </form>
 
-      {/* <div>Message : {container.data.chatbot.message}</div> */}
+      <div>Message : {container.chatbot.response}</div>
     </div>
   );
 }
